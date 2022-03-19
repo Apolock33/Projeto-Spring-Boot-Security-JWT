@@ -26,13 +26,17 @@ public class Locais {
 	private String descricao;
 	@Column(length = 100)
 	private String contato;
+	@Column(length = 300)
+	private String imagem;
+	@Column(length = 100)
+	private String site;
 	
 	public Locais() {
 		
 	}
 
 	public Locais(Long id_locais, String nome, String estado, String cidade, String endereco, String descricao,
-			String contato) {
+			String contato, String imagem, String site) {
 		super();
 		this.id_locais = id_locais;
 		this.nome = nome;
@@ -41,6 +45,8 @@ public class Locais {
 		this.endereco = endereco;
 		this.descricao = descricao;
 		this.contato = contato;
+		this.imagem = imagem;
+		this.site = site;
 	}
 
 	@Override
@@ -115,4 +121,21 @@ public class Locais {
 	public void setContato(String contato) {
 		this.contato = contato;
 	}
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
+
+	public String getSite() {
+		return site;
+	}
+
+	public void setSite(String site) {
+		this.site = site;
+	}
+	
 }
