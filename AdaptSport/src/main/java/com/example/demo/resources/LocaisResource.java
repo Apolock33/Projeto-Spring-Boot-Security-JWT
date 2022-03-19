@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,7 @@ import com.example.demo.services.LocaisService;
 @RestController
 @RequestMapping(name = "/locais")
 @CrossOrigin(origins = "http://localhost:3000/")
+@EnableMethodSecurity(prePostEnabled = true)
 public class LocaisResource {
 	
 	@Autowired
@@ -31,12 +34,14 @@ public class LocaisResource {
 	}
 
 	@PostMapping("/locais")
+	@PreAuthorize("hasRole('ADIMIN')")
 	public ResponseEntity<Locais> save(@RequestBody Locais locais) {
 		service.save(locais);
 		return ResponseEntity.ok().body(locais);
 	}
 
 	@DeleteMapping("/locais/{id}")
+	@PreAuthorize("hasRole('ADIMIN')")
 	public ResponseEntity<Locais> delete(@PathVariable Long id) {
 		service.delete(id);
 		Locais locais = service.getBy(id);
@@ -44,6 +49,7 @@ public class LocaisResource {
 	}
 
 	@PutMapping(value = "/locais/{id}")
+	@PreAuthorize("hasRole('ADIMIN')")
 	public ResponseEntity<Locais> update(@RequestBody Locais locais) {
 		service.save(locais);
 		return ResponseEntity.ok().body(locais);

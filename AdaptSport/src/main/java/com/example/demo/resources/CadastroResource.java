@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,7 @@ import com.example.demo.services.CadastroService;
 @RestController
 @RequestMapping(name = "/cadastro")
 @CrossOrigin(origins = "http://localhost:3000/")
+@EnableMethodSecurity(prePostEnabled = true)
 public class CadastroResource {
 	
 	@Autowired
@@ -37,6 +40,7 @@ public class CadastroResource {
 	}
 	
 	@DeleteMapping("/cadastro/{id}")
+	@PreAuthorize("hasRole('ADIMIN')")
 	public ResponseEntity<Cadastro> delete(@PathVariable Long id) {
 		service.delete(id);
 		Cadastro cadastro = service.getBy(id);
