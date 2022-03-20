@@ -23,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.withUser("squad")
 		.password(passwordEnconder.encode("senha"))
 		.roles("ADMIN", "USER");
+		System.out.println("PASSWORD1" + passwordEnconder.encode("4321"));
 		auth.userDetailsService(service).passwordEncoder(passwordEnconder);
 	}
 
